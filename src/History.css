@@ -1,0 +1,92 @@
+.btns {
+  margin: auto;
+  width: 20%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+hr {
+  border: none;
+  height: 1px;
+  width: 25%;
+  margin-top: 30px;
+}
+
+.btn {
+  cursor: pointer;
+  border-radius: 8px;
+  box-shadow: var(--box-shadow);
+  color: #fff;
+  border: 0;
+  display: block;
+  font-size: 16px;
+  margin-right: 10px;
+  margin: 10px 0 30px;
+  padding: 10px;
+  width: 100%;
+  transition: all 0.3s ease;
+  outline: none;
+}
+
+.btn-income {
+  background-color: #0ad42b;
+}
+.btn-income:hover {
+  background-color: #03bb22;
+}
+
+.btn-expense {
+  background-color: #e02828;
+}
+
+.btn-expense:hover {
+  background-color: #bb0303;
+}
+
+@media (max-width: 1000px) {
+  .expense {
+    width: 30%;
+  }
+  .delete-button {
+    opacity: 1;
+  }
+  .edit-button {
+    opacity: 1;
+  }
+}
+
+@media (max-width: 800px) {
+  .expense {
+    width: 40%;
+  }
+  .delete-button {
+    opacity: 1;
+  }
+  .edit-button {
+    opacity: 1;
+  }
+}
+
+@media (max-width: 500px) {
+  .btns {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.expense-enter {
+  opacity: 0;
+}
+.expense-enter-active {
+  opacity: 1;
+  transition: opacity 500ms ease-in;
+}
+.expense-exit {
+  opacity: 1;
+}
+.expense-exit-active {
+  opacity: 0;
+  transition: opacity 500ms ease-in;
+}

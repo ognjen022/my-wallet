@@ -1,0 +1,115 @@
+.expense {
+  background-color: #fff;
+  box-shadow: 2px 2px 6px 1px rgba(140, 129, 140, 1);
+  color: #333;
+  display: flex;
+  width: 15%;
+  border: 1px solid lightgray;
+  justify-content: space-between;
+  position: relative;
+  padding: 5px;
+  margin: 10px auto;
+  overflow: hidden;
+}
+
+.expense-info {
+  float: right;
+}
+
+.date {
+  display: block;
+  font-size: 0.6rem;
+  margin-top: 7px;
+  float: right;
+}
+
+.buttons {
+  display: flex;
+  align-items: center;
+}
+
+.expense-input {
+  height: 1px;
+}
+
+.delete-button {
+  cursor: pointer;
+  background-color: #e74c3c;
+  border: 0;
+  border-radius: 30px;
+  color: #fff;
+  font-size: 12px;
+  padding: 2px 5px;
+  left: 0;
+  margin: 5px;
+  opacity: 0;
+  float: left;
+  align-items: center;
+  transition: all 0.3s ease;
+}
+
+.edit-button {
+  cursor: pointer;
+  background-color: #e7b13c;
+  border: 0;
+  color: #fff;
+  border-radius: 5px;
+  font-size: 15px;
+  padding: 2px 5px;
+  left: 0;
+  opacity: 0;
+  float: left;
+  align-items: center;
+  transition: all 0.3s ease;
+}
+
+.save-button {
+  cursor: pointer;
+  background-color: #3ce74a;
+  border: 0;
+  color: #fff;
+  border-radius: 5px;
+  font-size: 15px;
+  padding: 2px 5px;
+  left: 0;
+  float: left;
+  align-items: center;
+  transition: all 0.3s ease;
+}
+
+.save-button:hover {
+  background-color: #1dca2c;
+}
+
+.expense:hover .delete-button {
+  opacity: 1;
+}
+
+.expense:hover .edit-button {
+  opacity: 1;
+}
+
+.edit-button:hover {
+  background-color: #ca8d08;
+}
+
+.delete-button:hover {
+  background-color: #d61702;
+}
+
+@media (max-width: 500px) {
+  .expense {
+    width: 30%;
+  }
+  .delete-button {
+    opacity: 1;
+  }
+  .edit-button {
+    opacity: 1;
+  }
+  .btns {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}

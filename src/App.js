@@ -1,24 +1,28 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useEffect } from 'react';
 import './App.css';
+import ExpenseTracker from './ExpenseTracker';
+import { useSelector } from 'react-redux';
+import { Switch, Route } from 'react-router-dom';
+import Auth from './Auth';
+import PrivateRoute from './PrivateRoute';
 
 function App() {
+  const theme = useSelector((state) => state.theme);
+
+  useEffect(() => {
+    window.localStorage.setItem('theme', theme);
+  }, [theme]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className={theme ? ' App background-dark' : 'App background-light'}>
+      <Switch>
+        <Route
+          exact
+          path="/"
+          render={(routeProps) => <Auth {...routeProps} />}
+        />
+        <PrivateRoute exact path="/expenses" component={ExpenseTracker} />
+      </Switch>
     </div>
   );
 }
