@@ -24,6 +24,7 @@
     "uuid": "^7.0.3"
   },
   "scripts": {
+    "postinstall": "ng build",
     "start": "node server/server.js",
     "dev": "react-scripts start",
     "build": "react-scripts build",
