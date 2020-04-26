@@ -11,7 +11,7 @@ export const startLoginWithGoogle = (payload, navigate, person) => {
       token: payload,
     };
     axios
-      .post('http://localhost:5000/login', { token })
+      .post(`${process.env.API_URL}/login`, { token })
       .then((res) => {
         localStorage.setItem('id', res.data.userid);
         localStorage.setItem('token', res.data.token);

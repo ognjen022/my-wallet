@@ -17,7 +17,7 @@ export const startAddExpense = (payload) => {
     const expenseToAdd = { author, id, name, amount, createdAt };
     console.log('EXPENSE FROM ACTION', expenseToAdd);
     axios
-      .post(`http://localhost:5000/expenses/${author}`, expenseToAdd)
+      .post(`${process.env.API_URL}/expenses/${author}`, expenseToAdd)
       .then((res) => {
         console.log(res.data);
         dispatch(addExpense(res.data));
@@ -34,7 +34,7 @@ export const setExpenses = (payload) => ({
 export const startSetExpenses = (payload, userid) => {
   return (dispatch) => {
     axios
-      .get(`http://localhost:5000/expenses/${userid}`)
+      .get(`${process.env.API_URL}/expenses/${userid}`)
       .then((res) => dispatch(setExpenses(res.data)))
       .catch((err) => console.log(err));
   };
@@ -48,7 +48,7 @@ export const removeExpense = (id) => ({
 export const startRemoveExpense = (id) => {
   return (dispatch) => {
     axios
-      .delete(`http://localhost:5000/expenses/${id}`)
+      .delete(`${process.env.API_URL}/expenses/${id}`)
       .then((res) => {
         dispatch(removeExpense(id));
       })
@@ -65,7 +65,7 @@ export const editExpense = (id, updates) => ({
 export const startEditExpense = (id, updates) => {
   return (dispatch) => {
     axios
-      .put(`http://localhost:5000/expenses/${id}`, updates)
+      .put(`${process.env.API_URL}/expenses/${id}`, updates)
       .then((res) => dispatch(editExpense(id, updates)))
       .catch((err) => console.log(err));
   };
