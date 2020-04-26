@@ -17,7 +17,10 @@ export const startAddExpense = (payload) => {
     const expenseToAdd = { author, id, name, amount, createdAt };
     console.log('EXPENSE FROM ACTION', expenseToAdd);
     axios
-      .post(`https://wallet-app-api.herokuapp.com/${author}`, expenseToAdd)
+      .post(
+        `https://wallet-app-api.herokuapp.com/expenses/${author}`,
+        expenseToAdd
+      )
       .then((res) => {
         console.log(res.data);
         dispatch(addExpense(res.data));
@@ -34,7 +37,7 @@ export const setExpenses = (payload) => ({
 export const startSetExpenses = (payload, userid) => {
   return (dispatch) => {
     axios
-      .get(`https://wallet-app-api.herokuapp.com/${userid}`)
+      .get(`https://wallet-app-api.herokuapp.com/expenses/${userid}`)
       .then((res) => dispatch(setExpenses(res.data)))
       .catch((err) => console.log(err));
   };
@@ -48,7 +51,7 @@ export const removeExpense = (id) => ({
 export const startRemoveExpense = (id) => {
   return (dispatch) => {
     axios
-      .delete(`https://wallet-app-api.herokuapp.com/${id}`)
+      .delete(`https://wallet-app-api.herokuapp.com/expenses/${id}`)
       .then((res) => {
         dispatch(removeExpense(id));
       })
@@ -65,7 +68,7 @@ export const editExpense = (id, updates) => ({
 export const startEditExpense = (id, updates) => {
   return (dispatch) => {
     axios
-      .put(`https://wallet-app-api.herokuapp.com/${id}`, updates)
+      .put(`https://wallet-app-api.herokuapp.com/expenses/${id}`, updates)
       .then((res) => dispatch(editExpense(id, updates)))
       .catch((err) => console.log(err));
   };
