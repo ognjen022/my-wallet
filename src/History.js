@@ -78,7 +78,7 @@ const History = () => {
               changeExpense={changeExpense}
               removeExpense={removeTransaction}
               key={expense._id}
-              id={expense.id}
+              id={expense._id}
               name={expense.name}
               amount={expense.amount}
             />
