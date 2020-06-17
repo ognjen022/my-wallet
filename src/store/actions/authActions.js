@@ -5,13 +5,18 @@ export const logInWithGoogle = (payload) => ({
   payload,
 });
 
-export const startLoginWithGoogle = (payload, navigate, person) => {
+export const startLoginWithGoogle = (
+  payload,
+  navigate,
+  person,
+  stopLoading
+) => {
   return (dispatch) => {
     const token = {
       token: payload,
     };
     axios
-      .post(`https://wallet-app-api.herokuapp.com/login`, { token })
+      .post(`https://wallet-app-api.herokuapp.com/users/login`, { token })
       .then((res) => {
         localStorage.setItem('id', res.data.userid);
         localStorage.setItem('token', res.data.token);
@@ -25,8 +30,12 @@ export const startLoginWithGoogle = (payload, navigate, person) => {
         };
         dispatch(logInWithGoogle(user));
         navigate();
+        stopLoading();
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.error(err.message);
+        stopLoading();
+      });
   };
 };
 

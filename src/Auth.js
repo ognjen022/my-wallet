@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { GoogleLogin } from 'react-google-login';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
@@ -10,11 +10,18 @@ function Auth() {
   const dispatch = useDispatch();
   const history = useHistory();
 
+  const [loading, setLoading] = useState(false);
+
   const navigateToExpenses = () => {
     history.push('/expenses');
   };
 
+  const stopLoading = () => {
+    setLoading(false);
+  };
+
   const responseGoogle = (response) => {
+    setLoading(true);
     const person = {
       name: response.profileObj.givenName,
       lastName: response.profileObj.familyName,
@@ -24,7 +31,8 @@ function Auth() {
       startLoginWithGoogle(
         response.tokenObj.access_token,
         navigateToExpenses,
-        person
+        person,
+        stopLoading
       )
     );
   };
@@ -53,7 +61,6 @@ function Auth() {
         }}
         style={{
           width: '100%',
-          background: 'rgb(2,0,36)',
           background:
             'linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 26%, rgba(0,212,255,1) 100%)',
         }}
@@ -66,7 +73,7 @@ function Auth() {
               className="loginBtn loginBtn--google"
               disabled={renderProps.disabled}
             >
-              Log in With Google
+              {loading ? 'Logging in...' : 'Log in With Google'}
             </button>
           </div>
         )}

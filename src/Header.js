@@ -29,7 +29,7 @@ function Header() {
         </span>
       </label>
       <div className="info">
-        <img src={user.pic} alt={user.name} />
+        <img className="user-img" src={user.pic} alt={user.name} />
         <button onClick={logOut} className="caption">
           <b>Log Out</b>
           <i className="fas fa-sign-out-alt"></i>

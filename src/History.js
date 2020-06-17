@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Expense from './Expense';
 import NewTransactionForm from './NewTransactionForm';
+import Spinner from './Spinner';
 import {
   startAddExpense,
   startSetExpenses,
@@ -16,41 +17,29 @@ const History = () => {
 
   const [editing, setEditing] = useState('');
   const [mode, setMode] = useState('Income');
-
-  const syncLocalStorage = () => {
-    window.localStorage.setItem('expenses', JSON.stringify(expenses));
-  };
+  const [loading, setLoading] = useState(true);
 
   const expenses = useSelector((state) => state.expenses);
-  const user = useSelector((state) => state.user);
+  const token = useSelector((state) => state.user.token);
 
+  const stopLoading = () => {
+    setLoading(false);
+  };
   useEffect(() => {
-    const data = JSON.parse(window.localStorage.getItem('expenses'));
-    if (!data) {
-      dispatch(startSetExpenses([], user.id));
-    } else {
-      dispatch(startSetExpenses(data, user.id));
-    }
-  }, [dispatch]);
-
-  useEffect(() => {
-    syncLocalStorage();
-  }, [expenses]);
+    dispatch(startSetExpenses(token, stopLoading));
+  }, []);
 
   const addTransaction = (transaction) => {
     const newTransaction = {
-      author: user.id,
       name: transaction.name,
       amount: transaction.amount,
       createdAt: moment(),
     };
-    dispatch(startAddExpense(newTransaction));
-    syncLocalStorage();
+    dispatch(startAddExpense(newTransaction, token));
   };
 
   const removeTransaction = (expense) => {
-    dispatch(startRemoveExpense(expense._id));
-    syncLocalStorage();
+    dispatch(startRemoveExpense(expense._id, token));
   };
 
   const changeExpense = (expenseid) => {
@@ -59,15 +48,17 @@ const History = () => {
 
   const saveChanges = (expense, changes) => {
     setEditing(false);
-    dispatch(startEditExpense(expense._id, changes));
-    dispatch(startSetExpenses(expenses));
+    dispatch(startEditExpense(expense._id, changes, token));
+    dispatch(startSetExpenses(expenses, stopLoading));
   };
 
   return (
     <div className="history">
       <hr style={{ backgroundColor: 'gray' }} />
       <h3>Transaction History</h3>
-      {expenses.length > 0 ? (
+      {loading ? (
+        <Spinner />
+      ) : expenses.length > 0 ? (
         <div>
           {expenses.map((expense) => (
             <Expense
@@ -85,7 +76,7 @@ const History = () => {
           ))}
         </div>
       ) : (
-        <h5>No transactions</h5>
+        <h5>No Transactions</h5>
       )}
       <div className="btns">
         <button onClick={() => setMode('Income')} className="btn btn-income">
