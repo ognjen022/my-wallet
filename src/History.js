@@ -27,7 +27,7 @@ const History = () => {
   };
   useEffect(() => {
     dispatch(startSetExpenses(token, stopLoading));
-  }, []);
+  }, [dispatch, token]);
 
   const addTransaction = (transaction) => {
     const newTransaction = {
