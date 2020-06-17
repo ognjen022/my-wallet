@@ -15,7 +15,7 @@ export const startAddExpense = (payload, token) => async (dispatch) => {
   const expenseToAdd = { name, amount, createdAt };
   try {
     const { data } = await axios.post(
-      `${process.env.REACT_APP_API_URL}/expenses`,
+      `https://wallet-app-api.herokuapp.com/expenses`,
       expenseToAdd,
       config
     );
@@ -31,7 +31,6 @@ export const setExpenses = (payload) => ({
 });
 
 export const startSetExpenses = (token, stopLoading) => async (dispatch) => {
-  console.log(process.env.REACT_APP_API_URL);
   const config = {
     headers: {
       Authorization: token,
@@ -39,7 +38,7 @@ export const startSetExpenses = (token, stopLoading) => async (dispatch) => {
   };
   try {
     const { data } = await axios.get(
-      `${process.env.REACT_APP_API_URL}/expenses`,
+      `https://wallet-app-api.herokuapp.com/expenses`,
       config
     );
     dispatch(setExpenses(data));
@@ -63,7 +62,7 @@ export const startRemoveExpense = (id, token) => async (dispatch) => {
   };
   try {
     await axios.delete(
-      `${process.env.REACT_APP_API_URL}/expenses/${id}`,
+      `https://wallet-app-api.herokuapp.com/expenses/${id}`,
       config
     );
     dispatch(removeExpense(id));
@@ -86,7 +85,7 @@ export const startEditExpense = (id, updates, token) => async (dispatch) => {
   };
   try {
     await axios.put(
-      `${process.env.REACT_APP_API_URL}/expenses/${id}`,
+      `https://wallet-app-api.herokuapp.com/expenses/${id}`,
       updates,
       config
     );
