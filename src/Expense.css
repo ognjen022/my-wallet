@@ -113,3 +113,9 @@
     justify-content: center;
   }
 }
+
+@media (min-width: 1900px) {
+  .expense {
+    width: 12%;
+  }
+}
