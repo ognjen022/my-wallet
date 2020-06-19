@@ -66,7 +66,7 @@ function Expense(props) {
         </div>
       ) : (
         <div>
-          <span className="expense-info">
+          <span className="expense-info-name">
             <b>{props.name}</b>
           </span>
           <br />

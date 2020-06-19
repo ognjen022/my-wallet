@@ -8,12 +8,18 @@
   justify-content: space-between;
   position: relative;
   padding: 5px;
+
   margin: 10px auto;
   overflow: hidden;
 }
 
 .expense-info {
   float: right;
+}
+
+.expense-info-name {
+  float: right;
+  word-wrap: break-word;
 }
 
 .date {
@@ -100,12 +106,16 @@
 @media (max-width: 500px) {
   .expense {
     width: 30%;
+    padding-left: 15px;
+    padding-right: 15px;
   }
   .delete-button {
     opacity: 1;
+    margin-left: 0px;
   }
   .edit-button {
     opacity: 1;
+    margin-left: 0px;
   }
   .btns {
     display: flex;
