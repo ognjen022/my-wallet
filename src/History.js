@@ -49,7 +49,6 @@ const History = () => {
   const saveChanges = (expense, changes) => {
     setEditing(false);
     dispatch(startEditExpense(expense._id, changes, token));
-    dispatch(startSetExpenses(expenses, stopLoading));
   };
 
   return (
